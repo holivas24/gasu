@@ -19,12 +19,12 @@
 	$datos = array();
 	$hour = " 23:59:59";
 	$userid = prepare($_REQUEST['userid']);
-	date_add($date,date_interval_create_from_date_string("-8 days"));
+	date_add($date,date_interval_create_from_date_string("-31 days"));
 
-	for($i=0;$i<7;$i++)
+	for($i=0;$i<30;$i++)
 		$dates[$i] =date_format(date_add($date,date_interval_create_from_date_string("1 days")),"Y-m-d");
 		
-	for($i=0;$i<7;$i++)
+	for($i=0;$i<30;$i++)
 	{
 		//echo $dates[$i].$hour."<br>";
 		$actual = $dates[$i].$hour;
@@ -35,21 +35,23 @@
 		    die("Connection failed: " . $conn->connect_error);
 		}
 
-		$sql = "SELECT * FROM registros WHERE tanque = 
-		(SELECT id FROM tanques WHERE usuario = '$userid') AND fecha <= '$actual'
-	 	ORDER BY fecha DESC LIMIT 1";
+		$sql = "SELECT * FROM registros 
+		WHERE tanque = 	(SELECT id FROM tanques WHERE usuario = '$userid') 
+		AND fecha <= '$actual' ORDER BY fecha DESC LIMIT 1";
 		
 		$result = $conn->query($sql);
 
-		if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) 
+		{
 		    // output data of each row
-		    while($row = $result->fetch_assoc()) {
+		    while($row = $result->fetch_assoc()) 
+		    {
 		        $datos[$i] = $row['porcentaje'] * 100;
-		        //echo $datos[$i]."<br>";
 		    }
-		} else {
+		} 
+		else 
+		{
 		    $datos[$i] = 0.00;
-		    //echo $datos[$i]."<br>";
 		}
 		$conn->close();
 	}

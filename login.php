@@ -69,7 +69,7 @@
     <div class="container">
       <div class="message" style="color:#FF0000"><?php if($message!="") { echo $message; } ?></div>
       <form class="form-signin" action="" method="post">
-        <h2 class="form-signin-heading">GasU</h2>
+        <h2 class="form-signin-heading"><center><img src="images/gasu.png" height="60" width="120"></center></h2>
         <label for="username" class="sr-only">Usuario</label>
         <input type="text" name="username" class="form-control" placeholder="Usuario" required autofocus>
         <label for="passwd" class="sr-only">Contraseña</label>

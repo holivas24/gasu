@@ -12,13 +12,15 @@ function prepare($data)
 $tanque = prepare($_REQUEST['tanque']);
 $porcentaje = prepare($_REQUEST['porcentaje']);
 
-$connection = mysql_connect($host,$user,$passwd);
-$query = "INSERT INTO registros (fecha,tanque,porcentaje) VALUES (now(),'$tanque','$porcentaje')";
+$conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+$sql = "INSERT INTO registros (id,fecha,tanque,porcentaje) VALUES (0,now(),'$tanque','$porcentaje')";
 
-$connection = mysql_connect($host,$user,$passwd);
-mysql_select_db($db,$connection) or die();    
-$result = mysql_query($query);
-mysql_close();
+$result = $conn->query($sql);
+$conn->close();
 
 
 ?>

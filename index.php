@@ -42,7 +42,7 @@
     if($_SESSION['nivel']>=2)
 		echo '<a class="navbar-brand" href="index.php">GasU Admin</a>';
 	else
-		echo '<a class="navbar-brand" href="index.php">GasU</a>';
+		echo '<a class="navbar-brand" href="index.php"><img src="images/gasu.png" height="50" width="120" style="margin-top:0px;"></a>';
 	?>
 	</div>
 		<div class="navbar-collapse collapse">
@@ -50,6 +50,7 @@
 		        <li>
 		            <a href="index.php">Inicio</a>
 		        </li>
+
 <?php 
 		        if($_SESSION['nivel']>=2){
 echo ' 
@@ -109,13 +110,8 @@ echo '
 	      <div id="nivel"></div>
 	    </div>
 	    <div class="col-sm-8">
-	      <h3 class="title">Consumo semanal</h3>
+	      <h3 class="title">Nivel mensual diario</h3>
 	      <div id="consumomes"></div>
-	    </div>
-	    <div class="col-sm-4">
-	      <h3>Column 3</h3>
-	      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-	      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
 	    </div>
 	</div>
 	<div id="results" class="display"></div>
@@ -226,20 +222,20 @@ function nivel(porcentaje) {
                 text: 'Porcentaje'
             },
             plotBands: [{
-                from: 75,
+                from: 50,
                 to: 100,
                 color: '#55BF3B' // green
             }, {
-                from: 50,
-                to: 75,
+                from: 20,
+                to: 50,
                 color: '#DDDF0D' // yellow
             }, {
-                from: 25,
-                to: 50,
+                from: 10,
+                to: 20,
                 color: '#FF8000' // orange
             }, {
                 from: 0,
-                to: 25,
+                to: 10,
                 color: '#DF5353' // red
             }]
         },
