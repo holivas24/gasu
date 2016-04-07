@@ -8,7 +8,7 @@
 ?>
 <html>
 <head>
-	<title>Inicio</title>
+	<title>GasU</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Styles -->
@@ -74,7 +74,7 @@ echo '
 				<li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
-			            <li><a href="#">Configuración</a></li>
+			            <li><a href="#" OnClick="configuracion()">Configuración</a></li>
 			            <li><a href="#">Forma de pago</a></li>
 			            <li><a href="#">Ayuda</a></li>
 			        </ul>
@@ -99,7 +99,6 @@ echo '
 </div>
 </body>
 </html>
-
 <style>
 .title{
 	text-align:center;
