@@ -10,7 +10,7 @@
 <head>
 	<title>GasU</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Styles -->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
@@ -51,15 +51,15 @@
 	    </button>
     <?php
     if($_SESSION['nivel']>=2)
-		echo '<a class="navbar-brand" href="index.php">GasU Admin</a>';
+		echo '<a class="navbar-brand" href="#" OnClick="info()">GasU Admin</a>';
 	else
-		echo '<a class="navbar-brand" href="index.php"><img src="images/gasu.png" height="50" width="120" style="margin-top:0px;"></a>';
+		echo '<a class="navbar-brand" href="#" OnClick="info()"><img src="images/gasu.png" height="50" width="120" style="margin-top:0px;"></a>';
 	?>
 	</div>
 		<div class="navbar-collapse collapse">
 	   		<ul class="nav navbar-nav">
 		        <li>
-		            <a href="index.php">Inicio</a>
+		            <a href="#" OnClick="info()">Inicio</a>
 		        </li>
 
 <?php 
@@ -92,16 +92,31 @@ echo '
     </div>
   </div>
 <!--End Navbar -->
-<div class="container">
-	<div id="wrapper" class="center" style="margin:10px;">
+<div class="container-fluid">
 	<div id="results" class="display row"></div>
-	</div>
+	
 </div>
 </body>
 </html>
 <style>
 .title{
 	text-align:center;
+}
+
+#results{
+	width: 100%;
+}
+
+.nivel{
+	min-width: 310px; 
+	max-width: 400px; 
+	height: 300px; 
+	margin: 0 auto;
+
+.mes{
+	min-width: 310px; 
+	height: 400px; 
+	margin: 0 auto;
 }
 
 </style>

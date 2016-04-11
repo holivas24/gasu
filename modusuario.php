@@ -1,9 +1,9 @@
 <?php
 require('config.php');
 	session_start();
-	$message ="";
-	if(isset($_SESSION["username"])){
+	if(!isset($_SESSION["username"])){
 		header("Location:index.php");
+		die();
 	}
 
 	function prepare($data) 

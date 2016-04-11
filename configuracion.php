@@ -17,10 +17,11 @@
 		 while($row = $result->fetch_assoc()) 
 		{		
 ?>
-<h3>Mi Cuenta <small><?php echo $row['username'];?></small></h3>
-<hr>
-<h4>Mi Usuario</h4>
+<h2>Mi cuenta <small><?php echo $row['username'];?></small></h2>
 <table class="table" width="50%">
+		<tr>
+			<td rowspan="5"><h4>Mis datos</h4></td>
+		</tr>
 		<tr>
 			<td>Nombre(s): </td>
 			<td><a href="#" id="nombres" data-type="text" data-title="Escribir nombres" class="editable"><?php echo $row['nombres'];?></a></td>
@@ -43,12 +44,44 @@
 	</table>
 
 	<button class="btn btn-sm btn-primary" id="guardarusuario"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
-<hr>
 <?php
 }
 $conn->close();
 ?>
-<h4>Mis Tanques</h4>
+
+<table class="table" width="50%">
+<?php
+		$conn = new mysqli($host, $user, $passwd, $db);
+			// Check connection
+			if ($conn->connect_error) {
+			    die("Connection failed: " . $conn->connect_error);
+			}
+		$sql = "SELECT * FROM tanques WHERE usuario='$userid'";
+		$result = $conn->query($sql);
+
+?>
+		<tr>
+			<td rowspan="<?php echo $result->num_rows +1; ?>"><h4>Mis Tanques</h4></td>
+		</tr>
+<?php
+		 while($row = $result->fetch_assoc()) 
+		{		
+?>
+
+		<tr>
+			<td>Dirección: </td>
+			<td><a href="#" id="nombres" data-type="text" data-title="Escribir nombres" class="editable"><?php echo $row['direccion'];?></a></td>
+			<td>Capacidad: </td>
+			<td><a href="#" id="nombres" data-type="text" data-title="Escribir nombres" class="editable"><?php echo $row['capacidad'];?></a></td>
+		</tr>
+<?php
+}
+$conn->close();
+?>
+</table>
+
+	<button class="btn btn-sm btn-primary" id="guardartanques"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button>
+<hr>
 
 <script>
 $(document).ready(function(){
@@ -67,6 +100,7 @@ function modUsuario()
 			apPaterno+'&apMaterno='+apMaterno+'&email='+email,
 			function(){
 				alert("Modificado exitosamente");
+				configuracion();
 			});
 }
 </script>

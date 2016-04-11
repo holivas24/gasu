@@ -3,51 +3,64 @@
 	if(!isset($_SESSION['username'])){
 		header("Location:login.php");
 	}
+
+    require('config.php');
+    // Create connection
+    $userid = $_SESSION['id'];
+    $conn = new mysqli($host, $user, $passwd, $db);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM tanques where usuario = '$userid'";
+    $result = $conn->query($sql);
+
+        // output data of each row
+        while($row = $result->fetch_assoc()) 
+        {
+
+echo '<div class="row">
+	    <div class="col-sm-4">
+            <h3 class="title">Nivel actual tanque '.$row['alias'].'</h3>
+            <div id="nivel'.$row['id'].'" class="nivel"></div>
+        </div>
+        <div class="col-sm-8">
+            <h3 class="title">Nivel mensual diario tanque '.$row['alias'].'</h3>
+            <div id="consumomes'.$row['id'].'" class="mes"></div>
+        </div>
+      </div>
+      <hr>
+';
+}
 ?>
-<div id="informacion" class="row">
-	<div class="col-sm-4">
-      <h3 class="title">Nivel actual</h3>
-      <div id="nivel"></div>
-    </div>
-    <div class="col-sm-8">
-      <h3 class="title">Nivel mensual diario</h3>
-      <div id="consumomes"></div>
-    </div>
-</div>
 <script>
 	$(document).ready(function(){
 <?php
-	require('config.php');
-	// Create connection
-	$userid = $_SESSION['id'];
-	$conn = new mysqli($host, $user, $passwd, $db);
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-	}
-
-	$sql = "SELECT * FROM registros where tanque = (SELECT id FROM tanques where usuario = '$userid') order by fecha desc LIMIT 1";
-	$result = $conn->query($sql);
-
-	if ($result->num_rows > 0) {
-	    // output data of each row
-	    while($row = $result->fetch_assoc()) {
-	        echo 'nivel(' . $row['porcentaje'] .');';
-	    }
-	} else {
-	    echo 'nivel(0)';
-	}
-	$conn->close();
+    $result = $conn->query($sql);
+    while($row = $result->fetch_assoc()) 
+        {
 ?>
-		$.getJSON('dataweek.php?userid=<?php echo $_SESSION['id'];?>',
+
+        $.getJSON('actualstate.php?tanque=<?php echo $row['id'];?>',
+        function(data){
+            nivel(data,'#nivel<?php echo $row['id'];?>');
+        });
+    
+		$.getJSON('dataweek.php?tanque=<?php echo $row['id'];?>',
 		function(data){
-			consumo(data[0],data[1]);
+			consumo(data[0],data[1],'#consumomes<?php echo $row['id'];?>');
 		});
-	});
+<?php
+    
+    }
+    $conn->close();
+?>
+});
 
-function nivel(porcentaje) {
+function nivel(porcentaje,target) {
 
-    $('#nivel').highcharts({
+    $(target).highcharts({
 
         chart: {
             type: 'gauge',
@@ -163,8 +176,8 @@ function nivel(porcentaje) {
     });
 }
 
-function consumo(fechas, datos) {
-    $('#consumomes').highcharts({
+function consumo(fechas, datos,target) {
+    $(target).highcharts({
         chart: {
             type: 'line'
         },

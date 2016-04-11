@@ -18,7 +18,7 @@
 	$dates = array();
 	$datos = array();
 	$hour = " 23:59:59";
-	$userid = prepare($_REQUEST['userid']);
+	$idtanque = prepare($_REQUEST['tanque']);
 	date_add($date,date_interval_create_from_date_string("-31 days"));
 
 	for($i=0;$i<30;$i++)
@@ -36,7 +36,7 @@
 		}
 
 		$sql = "SELECT * FROM registros 
-		WHERE tanque = 	(SELECT id FROM tanques WHERE usuario = '$userid') 
+		WHERE tanque = '$idtanque'	 
 		AND fecha <= '$actual' ORDER BY fecha DESC LIMIT 1";
 		
 		$result = $conn->query($sql);
