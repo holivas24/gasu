@@ -1,5 +1,29 @@
 $('#buscar').on("click",search);
 
+
+function pagos()
+{
+	var link = "pagos.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Pago');
+
+}
 function info()
 {
 	var link = "info.php";
@@ -20,6 +44,31 @@ function info()
 		alert(status);
 	});
 
+	$('title').text('GasU | Estacionarios');
+
+}
+
+function cilindros()
+{
+	var link = "cilindros.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Cilindros');
 }
 
 function configuracion()
@@ -42,6 +91,7 @@ function configuracion()
 		alert(status);
 	});
 
+	$('title').text('GasU | Configuración');
 }
 
 function admin()

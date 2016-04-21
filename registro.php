@@ -1,6 +1,6 @@
 <?php
 require('config.php');
-
+date_default_timezone_set('America/Chihuahua');
 function prepare($data) 
 {
   $data = trim($data);
@@ -21,6 +21,5 @@ $sql = "INSERT INTO registros (id,fecha,tanque,porcentaje) VALUES (0,now(),'$tan
 
 $result = $conn->query($sql);
 $conn->close();
-
-
+echo 'OK';
 ?>

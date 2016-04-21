@@ -11,6 +11,7 @@
       return $data;
     }
     require('config.php');
+    date_default_timezone_set('America/Chihuahua');
     // Create connection
     $lastvalue = 0.0;
     $idtanque = prepare($_REQUEST['tanque']);

@@ -5,6 +5,8 @@
 	if(!isset($_SESSION['username'])){
 		header("Location:login.php");
 	}
+
+	date_default_timezone_set('America/Chihuahua');
 	function prepare($data) 
 	{
 	  $data = trim($data);

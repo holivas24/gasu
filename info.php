@@ -1,3 +1,5 @@
+<button class="btn btn-lg btn-success" id="cilindros" onClick="cilindros()"><span class="glyphicon glyphicon-record"></span> Ir a Cilindros</button>
+<br><br><br>
 <?php
 	session_start();
 	if(!isset($_SESSION['username'])){
@@ -20,24 +22,35 @@
         while($row = $result->fetch_assoc()) 
         {
 
-echo '<div class="row">
+echo '  
+        <h3>Tanque '.$row['alias'].'</h3>
+        <button class="btn btn-sm btn-default" onClick="showReport('.$row['id'].')"><span class="glyphicon glyphicon-list-alt"></span> Reporte mensual</button>
+        <button class="btn btn-sm btn-success" id="pedido"><span class="glyphicon glyphicon-shopping-cart"></span> Solicitar recarga</button>
+        <div class="row" >
 	    <div class="col-sm-4">
-            <h3 class="title">Nivel actual tanque '.$row['alias'].'</h3>
+            <h4 class="title">Nivel</h4>
             <div id="nivel'.$row['id'].'" class="nivel"></div>
         </div>
-        <div class="col-sm-8">
-            <h3 class="title">Nivel mensual diario tanque '.$row['alias'].'</h3>
+        
+        <div class="col-sm-8 rmes" id="reporteMes'.$row['id'].'">
+            <h3 class="title">Reporte mensual tanque '.$row['alias'].'</h3>
             <div id="consumomes'.$row['id'].'" class="mes"></div>
         </div>
       </div>
+      
       <hr>
 ';
+
+//
 }
 ?>
 <script>
 	$(document).ready(function(){
+        $('.rmes').hide(2000);
 <?php
     $result = $conn->query($sql);
+    if($result->num_rows < 1)
+        echo 'cilindros();';
     while($row = $result->fetch_assoc()) 
         {
 ?>
@@ -58,7 +71,14 @@ echo '<div class="row">
 ?>
 });
 
-function nivel(porcentaje,target) {
+function showReport(tanque)
+{
+    target = '#reporteMes'+tanque;
+    $(target).toggle(1000);
+}
+
+function nivel(porcentaje,target) 
+{
 
     $(target).highcharts({
 
@@ -71,7 +91,7 @@ function nivel(porcentaje,target) {
         },
 
         title: {
-            text: 'Porcentaje <?php echo date("Y/m/d");?>'
+            text: 'Actual <?php echo date("d/m/Y");?>'
         },
 
         pane: {
@@ -149,7 +169,8 @@ function nivel(porcentaje,target) {
             }]
         },
         credits: {
-            enabled: false
+            text: 'GasU',
+            href: 'http://gasu.esy.es'
         },
 
         series: [{
@@ -204,7 +225,8 @@ function consumo(fechas, datos,target) {
             }
         },
         credits: {
-            enabled: false
+            text: 'GasU',
+            href: 'http://gasu.esy.es'
         },
         series: [{
             name: 'Porcentaje',

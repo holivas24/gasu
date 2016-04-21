@@ -5,6 +5,9 @@
 	if(!isset($_SESSION['username'])){
 		header("Location:login.php");
 	}
+	date_default_timezone_set('America/Chihuahua');
+	$date = date('d/m/Y');
+    $hour = date('H:i');
 ?>
 <html>
 <head>
@@ -16,10 +19,12 @@
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="media/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="editable/css/bootstrap-editable.css">  
+	<link rel="stylesheet" href="pace/radar.css">
 	<!-- Scripts-->
+	<script src="pace/pace.min.js"></script>
 	<script src="bootstrap/js/jquery-1.11.3.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="bootstrap/js/myscript.js"></script>
+	<script src="routes/sync.js"></script>
 	<script src="media/js/jquery.dataTables.min.js"></script>
 	<script src="editable/js/bootstrap-editable.min.js"></script>
 	<!--Highcharts scripts -->
@@ -53,7 +58,7 @@
     if($_SESSION['nivel']>=2)
 		echo '<a class="navbar-brand" href="#" OnClick="info()">GasU Admin</a>';
 	else
-		echo '<a class="navbar-brand" href="#" OnClick="info()"><img src="images/gasu.png" height="50" width="120" style="margin-top:0px;"></a>';
+		echo '<a class="navbar-brand" href="#" OnClick="info()"><img src="images/gasu.png" height="40" width="130" style="margin-top:0px;"></a>';
 	?>
 	</div>
 		<div class="navbar-collapse collapse">
@@ -75,7 +80,7 @@ echo '
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
 			            <li><a href="#" OnClick="configuracion()">Configuración</a></li>
-			            <li><a href="#">Forma de pago</a></li>
+			            <li><a href="#" OnClick="pagos()">Forma de pago</a></li>
 			            <li><a href="#">Ayuda</a></li>
 			        </ul>
 		        </li>
@@ -103,15 +108,12 @@ echo '
 	text-align:center;
 }
 
-#results{
-	width: 100%;
-}
-
 .nivel{
 	min-width: 310px; 
 	max-width: 400px; 
 	height: 300px; 
 	margin: 0 auto;
+}
 
 .mes{
 	min-width: 310px; 
@@ -119,4 +121,11 @@ echo '
 	margin: 0 auto;
 }
 
+/*body {
+    background-image: url('images/gasu_bn.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: auto;
+}*/
 </style>
