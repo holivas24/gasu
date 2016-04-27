@@ -4,17 +4,82 @@ session_start();
 		header("Location:login.php");
 	}
 if($_SESSION['nivel'] >=2)
-echo '
-			<div id="search" class="row">
-
-				<h3>Buscar Usuario</h3>
-				<form>
-					<label>Nombre : </label><input type="text" id="nombre">
-					<label>Apellido Paterno: </label><input type="text" id="apPaterno">
-					<label>Apellido Materno: </label><input type="text" id="apMaterno">
-					<button class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-search"></span> Buscar</button>
-				</form>
-			</div>
-		
-		';
 ?>
+<section class="wrapper">
+  <h1>Tabs with HTML5, CSS3 and jQuery</h1>
+  <ul class="tabs">
+    <li><a href="#tab1">Pestaña 1</a></li>
+    <li><a href="#tab2">Pestaña 2</a></li>
+    <li><a href="#tab3">Pestaña 3</a></li>
+  </ul>
+  <div class="clr"></div>
+  <section class="block">
+    <article id="tab1">
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</p>
+    </article>
+    <article id="tab2">
+      <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+    </article>
+    <article id="tab3">
+      <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis eget, gravida vitae, ultricies ac, leo. Integer leo pede, ornare a, lacinia eu, vulputate vel, nisl.</p>
+    </article>
+  </section>
+</section>
+
+<script>
+	$(function(){
+	  $('ul.tabs li:first').addClass('active');
+	  $('.block article').hide();
+	  $('.block article:first').show();
+	  $('ul.tabs li').on('click',function(){
+	    $('ul.tabs li').removeClass('active');
+	    $(this).addClass('active')
+	    $('.block article').hide();
+	    var activeTab = $(this).find('a').attr('href');
+	    $(activeTab).show();
+	    return false;
+	  });
+});
+</script>
+
+<style>
+.wrapper {
+  background: white;
+  margin: auto;
+  padding: 1em;
+  width: 80%;
+}
+h1 {
+  text-align: center;
+}
+ul.tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.tabs li {
+  border: gray solid 1px;
+  border-bottom: none;
+  float: left;
+  margin: 0 .25em 0 0;
+  padding: .25em .5em;
+}
+ul.tabs li a {
+  color: gray;
+  font-weight: bold;
+  text-decoration: none;
+}
+ul.tabs li.active {
+  background: gray;
+}
+ul.tabs li.active a {
+  color: white;
+}
+.clr {
+  clear: both;
+}
+article {
+  border-top: gray solid 1px;
+  padding: 0 1em;
+}
+</style>

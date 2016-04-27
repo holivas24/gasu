@@ -32,7 +32,7 @@ echo '    <tr>
             <td>Cilindro '.$row['alias'].'</td>
             <td>'.$row['capacidad'].'Kg</td>
             <td>
-            <button class="btn btn-sm btn-success" id="pedido'.$row['id'].'"><span class="glyphicon glyphicon-shopping-cart"></span> Realizar pedido</button>
+            <button class="btn btn-sm btn-success" id="pedido'.$row['id'].'" OnClick="pedido(2,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Realizar pedido</button>
             </td>
         </tr>
 ';
