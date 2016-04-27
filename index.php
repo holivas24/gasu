@@ -98,7 +98,9 @@ echo '
   </div>
 <!--End Navbar -->
 <div class="container-fluid">
-	<div id="results" class="display row"></div>
+	<div id="results" class="display row">
+		<!--El contenido va aqui -->
+	</div>
 	
 </div>
 </body>
