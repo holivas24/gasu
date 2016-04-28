@@ -25,6 +25,7 @@ if($_SESSION['nivel'] >=2)
     </article>
   </section>
 </section>
+
 <script>
 	$(function(){
 	  $('ul.tabs li:first').addClass('active');
@@ -46,6 +47,7 @@ if($_SESSION['nivel'] >=2)
   background: white;
   font-family: sans-serif;
 }
+<style>
 .wrapper {
   background: white;
   margin: auto;
