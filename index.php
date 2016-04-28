@@ -27,6 +27,7 @@
 	<script src="routes/sync.js"></script>
 	<script src="media/js/jquery.dataTables.min.js"></script>
 	<script src="editable/js/bootstrap-editable.min.js"></script>
+	<script src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
 	<!--Highcharts scripts -->
 	<script src="highcharts/js/highcharts.js"></script>
     <script src="highcharts/js/highcharts-more.js"></script>
@@ -80,7 +81,6 @@ echo '
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
 			            <li><a href="#" OnClick="configuracion()">Configuración</a></li>
-			            <li><a href="#" OnClick="pagos()">Forma de pago</a></li>
 			            <li><a href="#">Ayuda</a></li>
 			        </ul>
 		        </li>
