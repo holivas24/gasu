@@ -25,7 +25,7 @@
 echo '  
         <h3>Tanque '.$row['alias'].'</h3>
         <button class="btn btn-sm btn-default" onClick="showReport('.$row['id'].')"><span class="glyphicon glyphicon-list-alt"></span> Reporte mensual</button>
-        <button class="btn btn-sm btn-success" id="pedido"><span class="glyphicon glyphicon-shopping-cart"></span> Solicitar recarga</button>
+        <button class="btn btn-sm btn-success" id="pedido" onClick="pedido(1,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Solicitar recarga</button>
         <div class="row" >
 	    <div class="col-sm-4">
             <h4 class="title">Nivel</h4>

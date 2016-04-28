@@ -58,9 +58,7 @@
 	<!-- Scripts-->
 	<script src="bootstrap/js/jquery-1.11.3.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="bootstrap/js/myscript.js"></script>
-	<script src="media/js/jquery.dataTables.min.js"></script>
-	<script src="editable/js/bootstrap-editable.min.js"></script>
+	
 
 
 </head>
