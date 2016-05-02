@@ -23,7 +23,7 @@
 
     $sql = "SELECT * FROM cilindros where usuario = '$userid'";
     $result = $conn->query($sql);
-
+    $conn->close();
         // output data of each row
         while($row = $result->fetch_assoc()) 
         {

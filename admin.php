@@ -1,32 +1,525 @@
 <?php
 session_start();
-	if(!isset($_SESSION['username'])){
+	if(!isset($_SESSION['username']) && $_SESSION['nivel'] !=2){
 		header("Location:login.php");
+		die();
 	}
-if($_SESSION['nivel'] >=2)
+	function prepare($data) 
+	{
+	  $data = trim($data);
+	  $data = addslashes($data);
+	  $data = htmlspecialchars($data);
+	  return $data;
+	}
+	require('config.php');
 ?>
+<!--  MODAL Prueba -->
+<div class="modal fade" id="asignarPedidoDialog" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+	 		<div class="modal-header">
+	    		<button class="close" data-dismiss="modal">×</button>
+	   			<h4 class="modal-title">Asignar pedido</h4>
+	  		</div>
+	    	<div class="modal-body">
+		        <h5>Datos de asignacion</h5>
+		        <form role="form"> 
+		        <div class="form-group">
+			        <label>ID del Pedido</label>
+			        <input type="number" name="pedidoId" id="pedidoId" value="" class="form-control">
+		        </div>
+		        <div class="form-group">
+			        <label>Operador</label><br>
+			        <select name="asOperador" id="asOperador" class="form-control">
+			        	<?php
+							$conn = new mysqli($host, $user, $passwd, $db);
+								// Check connection
+								if ($conn->connect_error) {
+								    die("Connection failed: " . $conn->connect_error);
+								}
+							$sql = "SELECT * FROM operador";
+							$result = $conn->query($sql);
+							$conn->close();
+							 while($row = $result->fetch_assoc()) 
+						     {
+						     	echo '<option value="'.$row['id'].'">'.$row['nombres'].' '.$row['apPaterno'].' '.$row['apMaterno'].'</option>';
+						     }
+						?>
+					</select>
+				</div>
+				<button class="btn btn-primary">Asignar</button>
+				</form>	
+		    </div>
+		 	<div class="modal-footer">
+		      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+		 	</div>
+		</div>
+	</div>
+</div>
+<!-- END MODAL Prueba -->
+
 <section class="wrapper">
-  <h1>Tabs with HTML5, CSS3 and jQuery</h1>
   <ul class="tabs">
-    <li><a href="#tab1">Pestaña 1</a></li>
-    <li><a href="#tab2">Pestaña 2</a></li>
-    <li><a href="#tab3">Pestaña 3</a></li>
+    <li><a href="#tab1">Cilindros</a></li>
+    <li><a href="#tab2">Tanques</a></li>
+    <li><a href="#tab3">Cilindros Asignados</a></li>
+    <li><a href="#tab4">Tanques Asignados </a></li>
+    <li><a href="#tab5">Cilindros Entregado</a></li>
+    <li><a href="#tab6">Tanques Entregado</a></li>
   </ul>
-  <div class="clr"></div>
+  <div class="clr" style="margin:20px;"></div>
   <section class="block">
     <article id="tab1">
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</p>
+	<?php
+	$conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+                <td><a data-toggle="modal" data-id="<?php echo $row['id'];?>" title="Add this item" class="openAsignacion btn btn-primary" href="#asignarPedidoDialog">Asignar Pedido</a></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
     </article>
     <article id="tab2">
-      <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+      <?php
+
+    $conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
     </article>
     <article id="tab3">
-      <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet, lectus arcu pulvinar risus, vitae facilisis libero dolor a purus. Sed vel lacus. Mauris nibh felis, adipiscing varius, adipiscing in, lacinia vel, tellus. Suspendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis eget, gravida vitae, ultricies ac, leo. Integer leo pede, ornare a, lacinia eu, vulputate vel, nisl.</p>
+      <?php
+    $conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
+    </article>
+    <article id="tab4">
+      <?php
+    $conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
+    </article>
+     <article id="tab5">
+      <?php
+    $conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
+    </article>
+     <article id="tab6">
+      <?php
+    $conn = new mysqli($host, $user, $passwd, $db);
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+	$sql = "SELECT pedidosCilindro.id as id,
+	   pedidosCilindro.estado,
+	   pedidosCilindro.operador as nombreOp,
+	   usuarios.nombres as nombreUsuario, 
+	   usuarios.apPaterno as paternoUsuario,
+	   usuarios.apMaterno as maternoUsuario,
+	   cilindros.alias as cilindro, 
+	   cilindros.direccion,
+	   pedidosCilindro.fecha,
+	   pedidosCilindro.cantidad,
+	   pedidosCilindro.costo
+	FROM (usuarios INNER JOIN cilindros ON usuarios.id = cilindros.usuario) 
+	INNER JOIN pedidosCilindro ON cilindros.id=pedidosCilindro.cilindro";
+	$result = $conn->query($sql);
+	$conn->close();
+	?>
+	<table id="example" class="display tabla" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Dirección</th>
+                <th>Cliente</th>
+                <th>Operador</th>
+                <th>Cantidad</th>
+                <th>Costo</th>
+                <th>Cilindro</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
+        <?php
+        	 while($row = $result->fetch_assoc()) 
+        {
+        ?>
+        <tr>
+                <td><?php echo $row['id'];?></td>
+                <td class="estado"><?php echo $row['estado'];?></td>
+                <td><?php echo $row['direccion'];?></td>
+                <td><?php echo $row['nombreUsuario']." ".$row['paternoUsuario']." ".$row['maternoUsuario'];?></td>
+                <td><?php echo $row['nombreOp'];?></td>
+                <td><?php echo $row['cantidad'];?></td>
+                <td><?php echo $row['costo'];?></td>
+                <td><?php echo $row['cilindro'];?></td>
+                <td><?php echo $row['fecha'];?></td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
     </article>
   </section>
 </section>
 
 <script>
+$(document).ready(function() {
+	estado();
+	$(document).on("click", ".openAsignacion", function () {
+     var myBookId = $(this).data('id');
+     console.log("Executed");
+     $(".modal-body #pedidoId").val( myBookId );
+	});
+
+    $('.tabla').DataTable();
+});
+
+
+
+
+function estado()
+{
+	$('.estado').each(function()
+	{
+		if($(this).text()==1)
+			$(this).text("Pedido");
+	});
+}
+
 	$(function(){
 	  $('ul.tabs li:first').addClass('active');
 	  $('.block article').hide();
@@ -47,12 +540,11 @@ if($_SESSION['nivel'] >=2)
   background: white;
   font-family: sans-serif;
 }
-<style>
 .wrapper {
   background: white;
   margin: auto;
   padding: 1em;
-  width: 80%;
+  width: 90%;
 }
 h1 {
   text-align: center;

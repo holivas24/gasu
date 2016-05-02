@@ -35,9 +35,9 @@
     <script>
     	$(document).ready(function(){
     		<?php
-    		if($_SESSION['nivel']<2)
+    		if($_SESSION['nivel']==1)
     			echo 'info();';
-    		else
+    		else if($_SESSION['nivel']==2)
     			echo 'admin();';
     		?>
     	});
