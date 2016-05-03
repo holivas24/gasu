@@ -90,9 +90,13 @@ function configuracion()
 	$('title').text('GasU | Configuración');
 }
 
-function admin()
+function admin(cilTan)
 {
-	var link = "admin.php";
+	var link = "pedidosTanque.php";
+		if(cilTan == 1)
+			link = "pedidosTanque.php";
+		else if(cilTan == 2)
+			link = "pedidosCil.php";
 
 	$.ajax({
 		url: link,
@@ -110,7 +114,7 @@ function admin()
 		alert(status);
 	});
 
-	$('title').text('GasU | Operador');
+	$('title').text('GasU | Pedidos');
 
 }
 

@@ -56,27 +56,23 @@
 	        <span class="icon-bar"></span>
 	    </button>
     <?php
-    if($_SESSION['nivel']>=2)
-		echo '<a class="navbar-brand" href="#" OnClick="info()">GasU Admin</a>';
-	else
-		echo '<a class="navbar-brand" href="#" OnClick="info()"><img src="images/gasu.png" height="40" width="130" style="margin-top:0px;"></a>';
+    if($_SESSION['nivel']==2)
+		echo '<a class="navbar-brand" href="#" OnClick="admin(1)">GasU</a>';
+	else if($_SESSION['nivel']==1)
+		echo '<a class="navbar-brand" href="#" OnClick="info()">GasU</a>';
 	?>
 	</div>
 		<div class="navbar-collapse collapse">
 	   		<ul class="nav navbar-nav">
 		        <li>
-		            <a href="#" OnClick="info()">Inicio</a>
-		        </li>
+		        <?php
+		        	 if($_SESSION['nivel']==2)
+						echo '<a href="#" OnClick="admin(1)">Inicio</a>';
+					else if($_SESSION['nivel']==1)
+						echo '<a href="#" OnClick="info()">Inicio</a>';
 
-<?php 
-		        if($_SESSION['nivel']>=2){
-echo ' 
-		    	<li>
-		            <a href="#" onClick="nuevoUsuario()">Crear Usuario</a>
+		        ?>
 		        </li>
-';
-}
-?>
 				<li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
