@@ -20,6 +20,8 @@
 	<link rel="stylesheet" href="media/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="editable/css/bootstrap-editable.css">  
 	<link rel="stylesheet" href="pace/radar.css">
+	<link href="select2/dist/css/select2.min.css" rel="stylesheet" />
+
 	<!-- Scripts-->
 	<script src="pace/pace.min.js"></script>
 	<script src="bootstrap/js/jquery-1.11.3.min.js"></script>
@@ -32,6 +34,7 @@
 	<script src="highcharts/js/highcharts.js"></script>
     <script src="highcharts/js/highcharts-more.js"></script>
     <script src="highcharts/js/modules/exporting.js"></script>
+    <script src="select2/dist/js/select2.min.js"></script>
     <script>
     	$(document).ready(function(){
     		<?php
@@ -73,6 +76,19 @@
 
 		        ?>
 		        </li>
+		        <?php
+	   			
+		        
+		        	 if($_SESSION['nivel']==2)
+		        	 
+						echo '<li><a href="#" OnClick="reportes()">Reportes</a></li>';
+
+					else if($_SESSION['nivel']==1)
+						echo '<a href="#" OnClick="info()">Inicio</a>';
+
+		        
+		        
+		        ?>
 				<li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
 			        <ul class="dropdown-menu">
