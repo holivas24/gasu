@@ -197,8 +197,8 @@ elseif($estado != '*' && $operador != '*'){
     </table>
 <div class="col-sm-4"></div>
 <div class="col-sm-4">
-     <div class="panel panel-success">                       
-    <div class="panel-heading" style="background:#5cb85c;color:white;">
+     <div class="panel panel-primary">                       
+    <div class="panel-heading">
         Resultados de la consulta
     </div>    
     <div class="panel-body">
@@ -211,15 +211,15 @@ elseif($estado != '*' && $operador != '*'){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="success">
+                    <tr class="info">
                         <td>Numero de pedidos</td>
                         <td><?php echo $pedidos;?></td>
                     </tr>
-                    <tr class="success">
+                    <tr class="info">
                         <td>Cantidad vendida(<?php echo $unidad;?>)</td>
                         <td><?php echo $totalCant;?></td>
                     </tr>
-                    <tr class="success">
+                    <tr class="info">
                         <td>Total de ventas(<?php echo "$";?>)</td>
                         <td><?php echo $totalVent;?></td>
                     </tr>                    

@@ -20,6 +20,7 @@ function inicio()
 
 	$('title').text('GasU | Inicio');
 }
+
 function info()
 {
 	var link = "info.php";
@@ -41,7 +42,6 @@ function info()
 	});
 
 	$('title').text('GasU | Estacionarios');
-
 }
 
 function cilindros()

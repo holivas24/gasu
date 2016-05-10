@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="media/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="editable/css/bootstrap-editable.css">  
-	<link rel="stylesheet" href="pace/radar.css">
+	<link rel="stylesheet" href="pace/corner.css">
 	<link href="select2/dist/css/select2.min.css" rel="stylesheet" />
 
 	<!-- Scripts-->
@@ -82,9 +82,6 @@
 		        	 if($_SESSION['nivel']==2)
 		        	 
 						echo '<li><a href="#" OnClick="reportes()">Reportes</a></li>';
-
-					else if($_SESSION['nivel']==1)
-						echo '<a href="#" OnClick="info()">Inicio</a>';
 
 		        
 		        

@@ -82,7 +82,7 @@ var conektaErrorResponseHandler = function(response) {
     	<input type="text" data-conekta="card[exp_year]" class="form-control" placeholder="AAAA"/>
   	</div>
   </div>
-  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-usd"></span> Pagar pedido</button>
+  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-usd"></span> Pagar pedido</button>
 </form>
 </center>
 </div>

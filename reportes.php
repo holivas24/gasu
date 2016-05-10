@@ -51,7 +51,7 @@ session_start();
         <label class="radio-inline"><input type="radio" name="opcion" value="1" checked>Tanques</label>
         <label class="radio-inline"><input type="radio" name="opcion" value="2">Cilindros</label>
         <br><br>
-        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Consultar</button>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Consultar</button>
       </form>
       <br>
       <div id="tablaEstado"></div>
@@ -60,16 +60,26 @@ session_start();
 $(document).ready(function(){
     $('#fecha1').val(obtenerFecha());
     $('#fecha2').val(obtenerFecha());
+  /*
+  $('#fecha1').datepicker({ 
+     currentText: "Now",
+     dateFormat: 'yy/mm/dd',
+     altFormat: 'yyyy-mm-dd'
+     });
+    $('#fecha2').datepicker({ 
+     currentText: "Now",
+     dateFormat: 'yy/mm/dd',
+     altFormat: 'yyyy-mm-dd'
+     });
+*/
     $('.seleccionar').select2();
-
-    console.log(obtenerFecha());
-
 });
 
 function porEstado()
 {
   var link = 'buscarPorEstado.php?'+$( "#buscarPorEstado" ).serialize();
       console.log(link);
+
   $.ajax({
     url: link,
     contentType: 'application/html; charset=utf-8',

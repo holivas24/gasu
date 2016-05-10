@@ -1,4 +1,4 @@
-<button class="btn btn-lg btn-success" id="cilindros" onClick="cilindros()"><span class="glyphicon glyphicon-record"></span> Ir a Cilindros</button>
+<button class="btn btn-lg btn-primary" id="cilindros" onClick="cilindros()"><span class="glyphicon glyphicon-record"></span> Ir a Cilindros</button>
 <br><br><br>
 <?php
 	session_start();
@@ -25,7 +25,7 @@
 echo '  
         <h3>Tanque '.$row['alias'].'</h3>
         <button class="btn btn-sm btn-default" onClick="showReport('.$row['id'].')"><span class="glyphicon glyphicon-list-alt"></span> Reporte mensual</button>
-        <button class="btn btn-sm btn-success" id="pedido" onClick="pedido(1,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Solicitar recarga</button>
+        <button class="btn btn-sm btn-primary" id="pedido" onClick="pedido(1,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Solicitar recarga</button>
         <div class="row" >
 	    <div class="col-sm-4">
             <h4 class="title">Nivel</h4>
@@ -231,7 +231,7 @@ function consumo(fechas, datos,target) {
         series: [{
             name: 'Porcentaje',
             data: datos,
-            color:'#55BF3B'
+            color:'#337AB7'
         }
         ]
     });

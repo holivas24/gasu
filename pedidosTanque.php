@@ -57,7 +57,7 @@ session_start();
 	</div>
 </div>
 <!-- END MODAL -->
-<button class="btn btn-success" id="cilindros" onClick="admin(2)"><span class="glyphicon glyphicon-record"></span> Ir a Cilindros</button>
+<button class="btn btn-primary" id="cilindros" onClick="admin(2)"><span class="glyphicon glyphicon-record"></span> Ir a Cilindros</button>
 <section class="wrapper">
   <ul class="tabs">
     <li><a href="#tab1">Recargas pedidas</a></li>
@@ -145,7 +145,7 @@ session_start();
                 <td><?php echo $row['costo'];?></td>
                 <td><?php echo $row['tanque'];?></td>
                 <td><?php echo $row['fecha'];?></td>
-                <td><a data-toggle="modal" data-id="<?php echo $row['id'];?>" title="Add this item" class="openAsignacion btn btn-success" href="#asignarPedidoDialog">Asignar Pedido</a></td>
+                <td><a data-toggle="modal" data-id="<?php echo $row['id'];?>" title="Add this item" class="openAsignacion btn btn-primary" href="#asignarPedidoDialog">Asignar Pedido</a></td>
             </tr>
         <?php }?>
         </tbody>
@@ -227,7 +227,7 @@ session_start();
                 <td><?php echo $row['costo'];?></td>
                 <td><?php echo $row['tanque'];?></td>
                 <td><?php echo $row['fecha'];?></td>
-                <td><a href="entregarRecarga.php?idPedido=<?php echo $row['id'];?>" class="btn btn-success">Entregar</a></td>
+                <td><a href="entregarRecarga.php?idPedido=<?php echo $row['id'];?>" class="btn btn-primary">Entregar</a></td>
             </tr>
         <?php }?>
         </tbody>
@@ -391,7 +391,7 @@ ul.tabs li a {
   text-decoration: none;
 }
 ul.tabs li.active {
-  background: #5cb85c;
+  background: #337ab7;
 }
 ul.tabs li.active a {
   color: white;

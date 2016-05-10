@@ -1,4 +1,4 @@
-<button class="btn btn-lg btn-success" id="cilindros" onClick="info()"><span class="glyphicon glyphicon-record"></span> Ir a Estacionarios</button>
+<button class="btn btn-lg btn-primary" id="cilindros" onClick="info()"><span class="glyphicon glyphicon-record"></span> Ir a Estacionarios</button>
 <br><br><br>
 <table class="table" width="50%">
     <tr>
@@ -32,7 +32,7 @@ echo '    <tr>
             <td>Cilindro '.$row['alias'].'</td>
             <td>'.$row['capacidad'].'Kg</td>
             <td>
-            <button class="btn btn-sm btn-success" id="pedido'.$row['id'].'" onClick="pedido(2,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Realizar pedido</button>
+            <button class="btn btn-sm btn-primary" id="pedido'.$row['id'].'" onClick="pedido(2,'.$row['id'].')"><span class="glyphicon glyphicon-shopping-cart"></span> Realizar pedido</button>
             </td>
         </tr>
 ';
