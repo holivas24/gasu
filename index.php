@@ -30,6 +30,8 @@
 	<script src="media/js/jquery.dataTables.min.js"></script>
 	<script src="editable/js/bootstrap-editable.min.js"></script>
 	<script src="https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYDh3FLU_T2Kj2BLjT62-1XPbqFl_3JFg&signed_in=true&callback=initMap"></script>-->
 	<!--Highcharts scripts -->
 	<script src="highcharts/js/highcharts.js"></script>
     <script src="highcharts/js/highcharts-more.js"></script>
@@ -82,8 +84,9 @@
 		        	 if($_SESSION['nivel']==2)
 		        	 
 						echo '<li><a href="#" OnClick="reportes()">Reportes</a></li>';
-
-		        
+						echo '<li><a href="#" OnClick="niveles()">Niveles</a></li>';
+						echo '<li><a href="#" OnClick="newStation()">Agregar Contenedor</a></li>';
+		        	
 		        
 		        ?>
 				<li class="dropdown">

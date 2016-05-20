@@ -115,4 +115,3 @@ function obtenerFecha()
     return datetime;
 }
 </script>
-

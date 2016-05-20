@@ -15,10 +15,20 @@ require('config.php');
 	}
 	$ciudad = "Chihuahua";
 	$pais = "Mexico";
-	$tanque=prepare($_REQUEST['tanque']);
+	$alias=prepare($_REQUEST['alias']);
+	$tipo=prepare($_REQUEST['tipo']);
 	$direccion=prepare($_REQUEST['direccion']);
 	$capacidad=prepare($_REQUEST['capacidad']);
-	$nombreTanque=prepare($_REQUEST['nombreTanque']);
+
+	if($tipo==1)
+		$tipoT = "Estacion";
+	elseif($tipo==2)
+		$tipoT = "Salchicha";
+	elseif ($tipo==3)
+		$tipoT="Pipa";
+
+
+	
 
 	$dlocation = $direccion." ".$ciudad." ".$pais;
 
@@ -34,8 +44,7 @@ require('config.php');
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		}
-	$sql = "UPDATE tanques SET direccion='$direccion', capacidad='$capacidad', 
-	alias='$nombreTanque',latitud='$latitude', longitud='$longitude' WHERE id='$tanque'";
+	$sql = "INSERT INTO contenedores (id, tipo, alias, direccion, capacidad, latitud, longitud) VALUES (0, '$tipoT', '$alias', '$direccion', '$capacidad', '$latitude','$longitude')";
 	$result = $conn->query($sql);
 	$conn->close();
 	?>

@@ -166,4 +166,52 @@ function reportes()
 
 }
 
+function niveles()
+{
+	var link = "niveles.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Niveles');
+
+}
+
+function newStation()
+{
+	var link = "newStation.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Nuevo Contenedor');
+
+}
+
 

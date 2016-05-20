@@ -58,6 +58,7 @@ session_start();
 </div>
 <!-- END MODAL -->
 <button class="btn btn-primary" id="cilindros" onClick="admin(1)"><span class="glyphicon glyphicon-record"></span> Ir a Tanques</button>
+<button class="btn btn-primary" id="niveles" onClick="niveles()"><span class="glyphicon glyphicon-stats"></span> Niveles</button>
 <section class="wrapper">
   <ul class="tabs">
     <li><a href="#tab1">Cilindros pedidos</a></li>
