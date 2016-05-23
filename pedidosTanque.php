@@ -321,9 +321,9 @@ session_start();
 $(document).ready(function() {
 	estado();
 	$(document).on("click", ".openAsignacion", function () {
-     var myBookId = $(this).data('id');
+     var pedidoID = $(this).data('id');
      console.log("Executed");
-     $(".modal-body #pedidoId").val( myBookId );
+     $(".modal-body #pedidoId").val( pedidoID );
 	});
 
     $('.tabla').DataTable();

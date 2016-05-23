@@ -27,7 +27,7 @@ session_start();
     					<div class="col-sm-2"></div>
                         <div class="col-sm-8">
                         <div class="table-responsive">
-                        <h2 class="title">Estado Actual de contenedores</h2>
+                        <h2 class="title">Estado actual de contenedores</h2>
                         <table id="rtable" class="table table-striped table-bordered table-hover">
 	                        <thead>
 				                <tr>

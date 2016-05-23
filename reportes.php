@@ -7,6 +7,7 @@ session_start();
 
   $date = date('Y-m-d');
 ?>
+<button class="btn btn-primary" onClick="reporteNiveles()"><span class="glyphicon glyphicon-stats"></span> Contenedores</button>
 <div class="col-sm-12" style="width:100%">
   <h1 class="title">Reportes</h1>
       <form class="form-inline" role="form" id="buscarPorEstado" action="javascript:porEstado();">        
@@ -50,7 +51,6 @@ session_start();
         </div>
         <label class="radio-inline"><input type="radio" name="opcion" value="1" checked>Tanques</label>
         <label class="radio-inline"><input type="radio" name="opcion" value="2">Cilindros</label>
-        <br><br>
         <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Consultar</button>
       </form>
       <br>
@@ -78,8 +78,6 @@ $(document).ready(function(){
 function porEstado()
 {
   var link = 'buscarPorEstado.php?'+$( "#buscarPorEstado" ).serialize();
-      console.log(link);
-
   $.ajax({
     url: link,
     contentType: 'application/html; charset=utf-8',
@@ -96,22 +94,5 @@ function porEstado()
     alert(status);
   });
 
-}
-
-function addZero(i) 
-{
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
-
-function obtenerFecha()
-{
-    var currentdate = new Date(); 
-    var datetime = currentdate.getFullYear()+"-"+
-                   addZero((currentdate.getMonth()+1))+"-"+
-                   addZero(currentdate.getDate());
-    return datetime;
 }
 </script>

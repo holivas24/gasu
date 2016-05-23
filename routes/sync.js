@@ -214,4 +214,45 @@ function newStation()
 
 }
 
+function reporteNiveles()
+{
+	var link = "reporteNiveles.php";
 
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Reporte Contenedores');
+
+}
+
+//Funciones de tiempo
+
+function addZero(i) 
+{
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function obtenerFecha()
+{
+    var currentdate = new Date(); 
+    var datetime = currentdate.getFullYear()+"-"+
+                   addZero((currentdate.getMonth()+1))+"-"+
+                   addZero(currentdate.getDate());
+    return datetime;
+}

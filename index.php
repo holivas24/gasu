@@ -43,7 +43,7 @@
     		if($_SESSION['nivel']==1)
     			echo 'info();';
     		else if($_SESSION['nivel']==2)
-    			echo 'admin();';
+    			echo 'niveles();';
     		?>
     	});
     </script>
@@ -62,7 +62,7 @@
 	    </button>
     <?php
     if($_SESSION['nivel']==2)
-		echo '<a class="navbar-brand" href="#" OnClick="admin(1)">GasU</a>';
+		echo '<a class="navbar-brand" href="#" OnClick="niveles()">GasU</a>';
 	else if($_SESSION['nivel']==1)
 		echo '<a class="navbar-brand" href="#" OnClick="info()">GasU</a>';
 	?>
@@ -72,7 +72,7 @@
 		        <li>
 		        <?php
 		        	 if($_SESSION['nivel']==2)
-						echo '<a href="#" OnClick="admin(1)">Inicio</a>';
+						echo '<a href="#" OnClick="niveles()">Inicio</a>';
 					else if($_SESSION['nivel']==1)
 						echo '<a href="#" OnClick="info()">Inicio</a>';
 
@@ -82,11 +82,11 @@
 	   			
 		        
 		        	 if($_SESSION['nivel']==2)
-		        	 
-						echo '<li><a href="#" OnClick="reportes()">Reportes</a></li>';
-						echo '<li><a href="#" OnClick="niveles()">Niveles</a></li>';
+		        	 {
+						echo '<li><a href="#" OnClick="reporteNiveles()">Reportes</a></li>';
+						//echo '<li><a href="#" OnClick="niveles()">Niveles</a></li>';
 						echo '<li><a href="#" OnClick="newStation()">Agregar Contenedor</a></li>';
-		        	
+		        	}
 		        
 		        ?>
 				<li class="dropdown">
