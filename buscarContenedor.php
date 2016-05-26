@@ -141,47 +141,46 @@ elseif($tipo != '*' && $contenedor != '*'){
 
     function detalles()
     {
-        mapa();
-     grafica();
+        var contenedor = $('#idContenedor').val(),
+            fecha = $('#fechaDatos').val();
 
+        $.getJSON('jsonNiveles.php?contenedor='+contenedor+'&fecha='+fecha,
+            function(datos){
+                grafica(datos[1],datos[2],fecha);
+                mapa(datos[0]);
+            });
     }
 
-    function mapa()
+    function mapa(puntos)
     {
-        var locations = [
-      ['Bondi Beach', -33.890542, 151.274856, 4],
-      ['Coogee Beach', -33.923036, 151.259052, 5],
-      ['Cronulla Beach', -34.028249, 151.157507, 3],
-      ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-      ['Maroubra Beach', -33.950198, 151.259302, 1]
-    ];
+        console.log(puntos[0].latitud,puntos[0].longitud);
+       var map = new google.maps.Map(document.getElementById('mapaDetalle'), {
+          zoom: 10,
+          center: new google.maps.LatLng(puntos[0].latitud,puntos[0].longitud),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
 
-    var map = new google.maps.Map(document.getElementById('mapaDetalle'), {
-      zoom: 10,
-      center: new google.maps.LatLng(-33.92, 151.25),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
+        var infowindow = new google.maps.InfoWindow();
 
-    var infowindow = new google.maps.InfoWindow();
+        var marker, i;
 
-    var marker, i;
+        for (i = 0; i < puntos.length; i++) 
+        {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(puntos[i].latitud, puntos[i].longitud),
+            map: map
+          });
 
-    for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent('Hora: '+puntos[i].hora+'<br> Porcentaje: '+puntos[i].porcentaje+'%<br>Parada: '+puntos[i].posiscion);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
         }
-      })(marker, i));
-    }
     }
 
-    function grafica()
+    function grafica(horas,datos,fecha)
     {
         $('#graficaDetalle').highcharts({
         title: {
@@ -189,12 +188,11 @@ elseif($tipo != '*' && $contenedor != '*'){
             x: -20 //center
         },
         subtitle: {
-            text: '',
+            text: 'Fecha: '+fecha,
             x: -20
         },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: horas
         },
         yAxis: {
             title: {
@@ -221,7 +219,7 @@ elseif($tipo != '*' && $contenedor != '*'){
         },
         series: [{
             name: 'Nivel',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+            data: datos,
             color:'#0000FF'
         }]
     });
@@ -231,14 +229,14 @@ elseif($tipo != '*' && $contenedor != '*'){
       .map {
         position: center;
         height: 400px;
-        width: 100%
+        width: 80%
         margin: 0 auto;
       }
 
       .grafica{ 
         position: center;
         height: 400px;
-        width: 100%
+        width: 80%
         margin: 0 auto;
       }
 </style>

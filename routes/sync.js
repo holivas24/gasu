@@ -238,6 +238,30 @@ function reporteNiveles()
 
 }
 
+
+function send()
+{
+	var link = "send.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Movil');
+
+}
 //Funciones de tiempo
 
 function addZero(i) 
