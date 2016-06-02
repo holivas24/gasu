@@ -238,7 +238,58 @@ function reporteNiveles()
 
 }
 
+function nuevoModulo()
+{
+	var link = "newModule.php";
 
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Nuevo Modulo');
+
+}
+
+function asignarModulo()
+{
+	var link = "asignarModulo.php";
+
+	$.ajax({
+		url: link,
+		contentType: 'application/html; charset=utf-8',
+		type: 'GET',
+		dataType: 'html'
+
+	}).success(
+	function(result)
+		{
+			$('#results').html(result);
+		}
+	).error(function(xhr,status)
+	{
+		alert(status);
+	});
+
+	$('title').text('GasU | Asignar Modulo');
+
+}
+
+
+
+
+//Para app movil
 function send()
 {
 	var link = "send.php";

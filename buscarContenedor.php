@@ -52,6 +52,7 @@ elseif($tipo != '*' && $contenedor != '*'){
 	$result = $conn->query($sql);
 	$conn->close();
 ?>
+<div class="table-responsive">
 <table id="example" class="display tabla" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -93,6 +94,7 @@ elseif($tipo != '*' && $contenedor != '*'){
         <?php }?>
         </tbody>
     </table>
+</div>
 <!--  MODAL -->
 <div class="modal fade" id="detalleContenedor" role="dialog">
     <div class="modal-dialog">

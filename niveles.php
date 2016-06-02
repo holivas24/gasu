@@ -25,9 +25,9 @@ session_start();
 	$conn->close();
     ?>                  <div class="row">
     					<div class="col-sm-2"></div>
-                        <div class="col-sm-8">
-                        <div class="table-responsive">
+                        <div class="col-sm-8">                        
                         <h2 class="title">Estado actual de contenedores</h2>
+                        <div class="table-responsive">
                         <table id="rtable" class="table table-striped table-bordered table-hover">
 	                        <thead>
 				                <tr>

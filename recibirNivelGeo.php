@@ -21,9 +21,9 @@
 		return false;
 	}
 
-	if(isset($_REQUEST['contenedor']) && isset($_REQUEST['porcentaje']))
+	if(isset($_REQUEST['modulo']) && isset($_REQUEST['porcentaje']))
 	{
-		$contenedor = prepare($_REQUEST['contenedor']);
+		$modulo = prepare($_REQUEST['modulo']);
 		$porcentaje = prepare($_REQUEST['porcentaje']);
 		$latitud = prepare($_REQUEST['latitud']);
 		$longitud = prepare($_REQUEST['longitud']);
@@ -47,7 +47,7 @@
 				}
 		$sql = "INSERT INTO registrosContenedores 
 		(id,fecha,contenedor,porcentaje,latitud,longitud) 
-		VALUES (0,now(),'$contenedor','$porcentaje','$latitud','$longitud')";
+		VALUES (0,now(),(SELECT contenedor from modulos where cypher='$modulo'),'$porcentaje','$latitud','$longitud')";
 
 		$result = $conn->query($sql);
 		$conn->close();
@@ -59,7 +59,7 @@
 				}
 		$sql = "UPDATE contenedores
 		SET direccion='$direccion', latitud = '$latitud', longitud = '$longitud', porcentaje='$porcentaje'
-		WHERE id='$contenedor'";
+		WHERE id=(SELECT contenedor from modulos where cypher='$modulo')";
 
 		$result = $conn->query($sql);
 		$conn->close();

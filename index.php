@@ -90,10 +90,12 @@
 		        
 		        ?>
 				<li class="dropdown">
-			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Hardware<span class="caret"></span></a>
 			        <ul class="dropdown-menu">
-			            <li><a href="#" OnClick="configuracion()">Configuración</a></li>
-			            <li><a href="#">Ayuda</a></li>
+			        	<li><a href="#" onClick="nuevoModulo()">Agregar monitor</a></li>
+			        	<li><a href="#" onClick="asignarModulo()">Asignar monitor</a></li>
+			            <!-- <li><a href="#" OnClick="configuracion()">Configuración</a></li>
+			            <li><a href="#">Ayuda</a></li> -->
 			        </ul>
 		        </li>
 		        <li>
