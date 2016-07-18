@@ -1,11 +1,6 @@
 <?php
 	
 	require('config.php');
-	session_start();
-	if(!isset($_SESSION['username'])){
-		header("Location:login.php");
-	}
-
 	date_default_timezone_set('America/Chihuahua');
 	function prepare($data) 
 	{

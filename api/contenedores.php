@@ -42,7 +42,7 @@
 		    	$object->tipo = $row['tipo'];
 		    	$object->alias = $row['alias'];
 		    	$object->direccion = $row['direccion'];
-		    	$object->direccion = $row['capacidad'];
+		    	$object->capacidad = $row['capacidad'];
 		    	$object->latitud = $row['latitud'];
 		    	$object->longitud = $row['longitud'];
 		    	$object->porcentaje = $row['porcentaje'];
